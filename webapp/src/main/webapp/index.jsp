@@ -4,8 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>First Quad Tech – Register</title>
-font-family: 'Courier New', Courier, monospace;  /* replaces Space Mono */
-font-family: 'Georgia', serif;                    /* replaces Syne */
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -18,12 +16,14 @@ font-family: 'Georgia', serif;                    /* replaces Syne */
       --text: #f0f0f0;
       --muted: #666680;
       --border: rgba(255,255,255,0.08);
+      --font-display: 'Trebuchet MS', 'Arial Black', sans-serif;
+      --font-mono: 'Courier New', Courier, monospace;
     }
 
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'Space Mono', monospace;
+      font-family: var(--font-mono);
       min-height: 100vh;
       display: flex;
       align-items: center;
@@ -89,6 +89,7 @@ font-family: 'Georgia', serif;                    /* replaces Syne */
       padding: 6px 14px; border-radius: 100px;
       margin-bottom: 20px;
       text-transform: uppercase;
+      font-family: var(--font-mono);
     }
     .badge .dot {
       width: 6px; height: 6px; border-radius: 50%;
@@ -101,20 +102,20 @@ font-family: 'Georgia', serif;                    /* replaces Syne */
     }
 
     h1 {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(28px, 6vw, 40px);
+      font-family: var(--font-display);
+      font-size: clamp(28px, 6vw, 42px);
       font-weight: 800;
       line-height: 1.1;
       margin-bottom: 8px;
-      background: linear-gradient(135deg, #fff 0%, var(--muted) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: #ffffff;
+      letter-spacing: -1px;
     }
 
     h1 span {
       background: linear-gradient(135deg, var(--accent1), var(--accent3));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .subtitle {
@@ -122,6 +123,7 @@ font-family: 'Georgia', serif;                    /* replaces Syne */
       font-size: 13px;
       margin-bottom: 32px;
       line-height: 1.6;
+      font-family: var(--font-mono);
     }
 
     /* Card */
@@ -167,6 +169,7 @@ font-family: 'Georgia', serif;                    /* replaces Syne */
       text-transform: uppercase;
       color: var(--muted);
       margin-bottom: 8px;
+      font-family: var(--font-mono);
     }
 
     .input-wrap {
@@ -187,7 +190,7 @@ font-family: 'Georgia', serif;                    /* replaces Syne */
       border: 1px solid var(--border);
       border-radius: 12px;
       color: var(--text);
-      font-family: 'Space Mono', monospace;
+      font-family: var(--font-mono);
       font-size: 14px;
       padding: 14px 16px 14px 44px;
       transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
@@ -202,13 +205,12 @@ font-family: 'Georgia', serif;                    /* replaces Syne */
       box-shadow: 0 0 0 3px rgba(184,255,62,0.1);
     }
 
-    input:focus + .focus-line { transform: scaleX(1); }
-
     /* Divider */
     .divider {
       display: flex; align-items: center; gap: 12px;
       margin: 8px 0 20px;
       color: var(--muted); font-size: 11px; letter-spacing: 0.08em;
+      font-family: var(--font-mono);
     }
     .divider::before, .divider::after {
       content: '';
@@ -223,7 +225,7 @@ font-family: 'Georgia', serif;                    /* replaces Syne */
       color: #0a0a0f;
       border: none;
       border-radius: 12px;
-      font-family: 'Syne', sans-serif;
+      font-family: var(--font-display);
       font-size: 16px;
       font-weight: 800;
       padding: 16px;
@@ -257,6 +259,7 @@ font-family: 'Georgia', serif;                    /* replaces Syne */
       margin-top: 24px;
       font-size: 13px;
       color: var(--muted);
+      font-family: var(--font-mono);
     }
     .signin-row a {
       color: var(--accent3);
@@ -273,6 +276,7 @@ font-family: 'Georgia', serif;                    /* replaces Syne */
       margin-top: 16px;
       text-align: center;
       line-height: 1.6;
+      font-family: var(--font-mono);
     }
     .terms a { color: var(--accent2); text-decoration: none; }
     .terms a:hover { text-decoration: underline; }
@@ -281,7 +285,7 @@ font-family: 'Georgia', serif;                    /* replaces Syne */
     .thankyou {
       text-align: center;
       margin-top: 28px;
-      font-family: 'Syne', sans-serif;
+      font-family: var(--font-display);
       font-size: 13px;
       color: var(--muted);
       letter-spacing: 0.1em;
@@ -290,6 +294,7 @@ font-family: 'Georgia', serif;                    /* replaces Syne */
       background: linear-gradient(135deg, var(--accent1), var(--accent2));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      background-clip: text;
       font-weight: 800;
     }
 
@@ -305,6 +310,7 @@ font-family: 'Georgia', serif;                    /* replaces Syne */
       border: 1px solid var(--border);
       color: var(--muted);
       letter-spacing: 0.05em;
+      font-family: var(--font-mono);
     }
     .tag.a1 { border-color: rgba(184,255,62,0.3); color: var(--accent1); }
     .tag.a2 { border-color: rgba(255,62,184,0.3); color: var(--accent2); }
@@ -396,7 +402,7 @@ font-family: 'Georgia', serif;                    /* replaces Syne */
         e.preventDefault();
         document.getElementById('psw-repeat').style.borderColor = '#ff3eb8';
         document.getElementById('psw-repeat').style.boxShadow = '0 0 0 3px rgba(255,62,184,0.15)';
-        document.getElementById('psw-repeat').placeholder = "❌ Passwords don't match!";
+        document.getElementById('psw-repeat').placeholder = "Passwords don't match!";
       }
     });
   </script>
