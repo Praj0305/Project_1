@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>First Quad Tech – Register</title>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+font-family: 'Courier New', Courier, monospace;  /* replaces Space Mono */
+font-family: 'Georgia', serif;                    /* replaces Syne */
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
