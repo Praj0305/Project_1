@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>First Quad Tech – Register</title>
+  <title>First Quad Tech - Register</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -32,7 +32,6 @@
       position: relative;
     }
 
-    /* Animated background blobs */
     body::before, body::after {
       content: '';
       position: fixed;
@@ -60,13 +59,6 @@
       to   { transform: translate(40px, 40px) scale(1.1); }
     }
 
-    /* Noise texture overlay */
-    .noise {
-      position: fixed; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none; z-index: 1; opacity: 0.4;
-    }
-
     .wrapper {
       position: relative; z-index: 2;
       width: 100%; max-width: 520px;
@@ -79,7 +71,6 @@
       to   { opacity:1; transform: translateY(0); }
     }
 
-    /* Badge */
     .badge {
       display: inline-flex; align-items: center; gap: 8px;
       background: rgba(184,255,62,0.1);
@@ -123,10 +114,8 @@
       font-size: 13px;
       margin-bottom: 32px;
       line-height: 1.6;
-      font-family: var(--font-mono);
     }
 
-    /* Card */
     .card {
       background: var(--card);
       border: 1px solid var(--border);
@@ -145,7 +134,6 @@
       opacity: 0.6;
     }
 
-    /* Form fields */
     .field {
       margin-bottom: 20px;
       animation: fadeIn 0.5s ease both;
@@ -176,12 +164,15 @@
       position: relative;
     }
 
-    .input-icon {
+    .input-prefix {
       position: absolute;
       left: 14px; top: 50%;
       transform: translateY(-50%);
-      font-size: 16px;
+      font-size: 13px;
+      color: var(--accent1);
+      font-weight: 700;
       pointer-events: none;
+      font-family: var(--font-mono);
     }
 
     input {
@@ -205,7 +196,6 @@
       box-shadow: 0 0 0 3px rgba(184,255,62,0.1);
     }
 
-    /* Divider */
     .divider {
       display: flex; align-items: center; gap: 12px;
       margin: 8px 0 20px;
@@ -218,7 +208,6 @@
       background: var(--border);
     }
 
-    /* Submit button */
     .btn-register {
       width: 100%;
       background: var(--accent1);
@@ -232,28 +221,16 @@
       cursor: pointer;
       letter-spacing: 0.05em;
       text-transform: uppercase;
-      transition: transform 0.15s, box-shadow 0.15s, background 0.2s;
-      position: relative;
-      overflow: hidden;
+      transition: transform 0.15s, box-shadow 0.15s;
       margin-top: 8px;
-    }
-
-    .btn-register::after {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
-      opacity: 0;
-      transition: opacity 0.2s;
     }
 
     .btn-register:hover {
       transform: translateY(-2px);
       box-shadow: 0 8px 30px rgba(184,255,62,0.35);
     }
-    .btn-register:hover::after { opacity: 1; }
     .btn-register:active { transform: translateY(0); }
 
-    /* Sign in link */
     .signin-row {
       text-align: center;
       margin-top: 24px;
@@ -265,11 +242,9 @@
       color: var(--accent3);
       text-decoration: none;
       font-weight: 700;
-      transition: color 0.2s;
     }
     .signin-row a:hover { color: var(--accent1); }
 
-    /* Terms */
     .terms {
       font-size: 11px;
       color: var(--muted);
@@ -279,9 +254,7 @@
       font-family: var(--font-mono);
     }
     .terms a { color: var(--accent2); text-decoration: none; }
-    .terms a:hover { text-decoration: underline; }
 
-    /* Footer thank you */
     .thankyou {
       text-align: center;
       margin-top: 28px;
@@ -298,7 +271,6 @@
       font-weight: 800;
     }
 
-    /* Tag pills */
     .tags {
       display: flex; flex-wrap: wrap; gap: 8px;
       margin-bottom: 28px;
@@ -318,13 +290,12 @@
   </style>
 </head>
 <body>
-  <div class="noise"></div>
 
   <div class="wrapper">
     <div class="badge"><span class="dot"></span> First Quad Tech Solution</div>
 
     <h1>Learn <span>DevOps</span><br/>the right way.</h1>
-    <p class="subtitle">Create your account and start your journey. No cap. 🚀</p>
+    <p class="subtitle">Create your account and start your journey. No cap.</p>
 
     <div class="tags">
       <span class="tag a1">#DevOps</span>
@@ -340,7 +311,7 @@
         <div class="field">
           <label for="Name">Full Name</label>
           <div class="input-wrap">
-            <span class="input-icon">👤</span>
+            <span class="input-prefix">[N]</span>
             <input type="text" id="Name" name="Name" placeholder="e.g. Alex Johnson" required />
           </div>
         </div>
@@ -348,7 +319,7 @@
         <div class="field">
           <label for="mobile">Mobile Number</label>
           <div class="input-wrap">
-            <span class="input-icon">📱</span>
+            <span class="input-prefix">[M]</span>
             <input type="tel" id="mobile" name="mobile" placeholder="+91 98765 43210" required />
           </div>
         </div>
@@ -356,17 +327,17 @@
         <div class="field">
           <label for="email">Email Address</label>
           <div class="input-wrap">
-            <span class="input-icon">✉️</span>
+            <span class="input-prefix">[E]</span>
             <input type="email" id="email" name="email" placeholder="you@email.com" required />
           </div>
         </div>
 
-        <div class="divider">security</div>
+        <div class="divider">-- security --</div>
 
         <div class="field">
           <label for="psw">Password</label>
           <div class="input-wrap">
-            <span class="input-icon">🔒</span>
+            <span class="input-prefix">[P]</span>
             <input type="password" id="psw" name="psw" placeholder="Make it strong!" required />
           </div>
         </div>
@@ -374,35 +345,34 @@
         <div class="field">
           <label for="psw-repeat">Confirm Password</label>
           <div class="input-wrap">
-            <span class="input-icon">🔑</span>
+            <span class="input-prefix">[C]</span>
             <input type="password" id="psw-repeat" name="psw-repeat" placeholder="Same as above" required />
           </div>
         </div>
 
-        <button type="submit" class="btn-register">Create Account →</button>
+        <button type="submit" class="btn-register">Create Account</button>
 
         <p class="terms">
-          By registering, you agree to our <a href="#">Terms</a> & <a href="#">Privacy Policy</a>.
+          By registering, you agree to our <a href="#">Terms</a> &amp; <a href="#">Privacy Policy</a>.
         </p>
       </form>
     </div>
 
     <p class="signin-row">Already have an account? <a href="#">Sign in here</a></p>
 
-    <p class="thankyou">✌️ <span>Happy Learning!</span> You got this.</p>
+    <p class="thankyou">-- <span>Happy Learning!</span> You got this. --</p>
   </div>
 
   <script>
-    // Password match validation
-    const form = document.querySelector('form');
-    form.addEventListener('submit', (e) => {
-      const p1 = document.getElementById('psw').value;
-      const p2 = document.getElementById('psw-repeat').value;
+    var form = document.querySelector('form');
+    form.addEventListener('submit', function(e) {
+      var p1 = document.getElementById('psw').value;
+      var p2 = document.getElementById('psw-repeat').value;
       if (p1 !== p2) {
         e.preventDefault();
         document.getElementById('psw-repeat').style.borderColor = '#ff3eb8';
         document.getElementById('psw-repeat').style.boxShadow = '0 0 0 3px rgba(255,62,184,0.15)';
-        document.getElementById('psw-repeat').placeholder = "Passwords don't match!";
+        document.getElementById('psw-repeat').placeholder = "Passwords do not match!";
       }
     });
   </script>
