@@ -8,359 +8,451 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #0a0a0f;
-      --card: #111118;
-      --accent1: #b8ff3e;
-      --accent2: #ff3eb8;
-      --accent3: #3eb8ff;
-      --text: #f0f0f0;
-      --muted: #666680;
-      --border: rgba(255,255,255,0.08);
-      --font-display: 'Trebuchet MS', 'Arial Black', sans-serif;
-      --font-mono: 'Courier New', Courier, monospace;
+      --cream: #f5f0e8;
+      --warm-white: #faf8f4;
+      --gold: #c9a84c;
+      --gold-light: #e8c97a;
+      --gold-dark: #a07830;
+      --ink: #1a1612;
+      --ink-soft: #3d3530;
+      --muted: #8c7f72;
+      --border: #d8cfc4;
+      --border-light: #ede7dd;
+      --shadow: rgba(26,22,18,0.12);
     }
 
     body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--font-mono);
+      background: var(--cream);
+      color: var(--ink);
+      font-family: Georgia, 'Times New Roman', serif;
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow-x: hidden;
       position: relative;
+      overflow-x: hidden;
     }
 
-    body::before, body::after {
+    /* Subtle grid background */
+    body::before {
       content: '';
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(100px);
-      opacity: 0.15;
-      animation: blobFloat 8s ease-in-out infinite alternate;
+      position: fixed; inset: 0;
+      background-image:
+        linear-gradient(var(--border-light) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border-light) 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity: 0.5;
       pointer-events: none;
       z-index: 0;
     }
-    body::before {
-      width: 500px; height: 500px;
-      background: var(--accent2);
-      top: -100px; left: -100px;
-    }
+
+    /* Corner ornaments */
     body::after {
-      width: 400px; height: 400px;
-      background: var(--accent3);
-      bottom: -100px; right: -100px;
-      animation-delay: -4s;
+      content: '';
+      position: fixed;
+      top: 20px; left: 20px;
+      width: 120px; height: 120px;
+      border-top: 2px solid var(--gold);
+      border-left: 2px solid var(--gold);
+      opacity: 0.4;
+      pointer-events: none;
+      z-index: 0;
     }
 
-    @keyframes blobFloat {
-      from { transform: translate(0,0) scale(1); }
-      to   { transform: translate(40px, 40px) scale(1.1); }
+    .corner-br {
+      position: fixed;
+      bottom: 20px; right: 20px;
+      width: 120px; height: 120px;
+      border-bottom: 2px solid var(--gold);
+      border-right: 2px solid var(--gold);
+      opacity: 0.4;
+      pointer-events: none;
+      z-index: 0;
     }
 
     .wrapper {
-      position: relative; z-index: 2;
-      width: 100%; max-width: 520px;
-      padding: 24px;
-      animation: slideUp 0.7s cubic-bezier(0.16,1,0.3,1) both;
+      position: relative; z-index: 1;
+      width: 100%; max-width: 560px;
+      padding: 32px 24px;
+      animation: fadeUp 0.8s ease both;
     }
 
-    @keyframes slideUp {
-      from { opacity:0; transform: translateY(40px); }
-      to   { opacity:1; transform: translateY(0); }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
-    .badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(184,255,62,0.1);
-      border: 1px solid rgba(184,255,62,0.3);
-      color: var(--accent1);
-      font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
-      padding: 6px 14px; border-radius: 100px;
+    /* Header section */
+    .header {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    .monogram {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px; height: 64px;
+      border: 2px solid var(--gold);
+      border-radius: 50%;
       margin-bottom: 20px;
-      text-transform: uppercase;
-      font-family: var(--font-mono);
+      font-family: Georgia, serif;
+      font-size: 22px;
+      font-weight: bold;
+      color: var(--gold-dark);
+      background: var(--warm-white);
+      box-shadow: 0 0 0 6px var(--cream), 0 0 0 7px var(--border);
+      letter-spacing: 1px;
     }
-    .badge .dot {
-      width: 6px; height: 6px; border-radius: 50%;
-      background: var(--accent1);
-      animation: pulse 1.5s ease-in-out infinite;
+
+    .rule {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0 auto 16px;
+      max-width: 340px;
     }
-    @keyframes pulse {
-      0%,100% { opacity:1; transform:scale(1); }
-      50%      { opacity:0.4; transform:scale(1.5); }
+    .rule::before, .rule::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+    .rule-diamond {
+      width: 6px; height: 6px;
+      background: var(--gold);
+      transform: rotate(45deg);
+      flex-shrink: 0;
     }
 
     h1 {
-      font-family: var(--font-display);
-      font-size: clamp(28px, 6vw, 42px);
-      font-weight: 800;
-      line-height: 1.1;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: clamp(24px, 5vw, 34px);
+      font-weight: normal;
+      color: var(--ink);
+      letter-spacing: 0.04em;
+      line-height: 1.2;
       margin-bottom: 8px;
-      color: #ffffff;
-      letter-spacing: -1px;
     }
 
-    h1 span {
-      background: linear-gradient(135deg, var(--accent1), var(--accent3));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    h1 em {
+      font-style: italic;
+      color: var(--gold-dark);
+    }
+
+    .institution {
+      font-family: Georgia, serif;
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
     }
 
     .subtitle {
+      font-size: 14px;
       color: var(--muted);
-      font-size: 13px;
-      margin-bottom: 32px;
+      font-style: italic;
       line-height: 1.6;
     }
 
+    /* Card */
     .card {
-      background: var(--card);
+      background: var(--warm-white);
       border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 32px;
+      border-radius: 4px;
+      padding: 40px;
       position: relative;
-      overflow: hidden;
+      box-shadow:
+        0 1px 3px var(--shadow),
+        0 8px 32px rgba(26,22,18,0.06),
+        inset 0 1px 0 rgba(255,255,255,0.8);
     }
 
+    /* Inner border decoration */
     .card::before {
       content: '';
       position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--accent1), var(--accent2), transparent);
-      opacity: 0.6;
+      inset: 8px;
+      border: 1px solid var(--border-light);
+      border-radius: 2px;
+      pointer-events: none;
     }
 
+    .card-title {
+      font-size: 10px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      text-align: center;
+      margin-bottom: 28px;
+      font-family: Georgia, serif;
+    }
+
+    /* Fields */
     .field {
-      margin-bottom: 20px;
+      margin-bottom: 22px;
       animation: fadeIn 0.5s ease both;
     }
     .field:nth-child(1) { animation-delay: 0.1s; }
-    .field:nth-child(2) { animation-delay: 0.15s; }
-    .field:nth-child(3) { animation-delay: 0.2s; }
-    .field:nth-child(4) { animation-delay: 0.25s; }
-    .field:nth-child(5) { animation-delay: 0.3s; }
+    .field:nth-child(2) { animation-delay: 0.18s; }
+    .field:nth-child(3) { animation-delay: 0.26s; }
+    .field:nth-child(4) { animation-delay: 0.34s; }
+    .field:nth-child(5) { animation-delay: 0.42s; }
 
     @keyframes fadeIn {
-      from { opacity:0; transform: translateX(-10px); }
-      to   { opacity:1; transform: translateX(0); }
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
     label {
       display: block;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
+      font-size: 10px;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--muted);
-      margin-bottom: 8px;
-      font-family: var(--font-mono);
-    }
-
-    .input-wrap {
-      position: relative;
-    }
-
-    .input-prefix {
-      position: absolute;
-      left: 14px; top: 50%;
-      transform: translateY(-50%);
-      font-size: 13px;
-      color: var(--accent1);
-      font-weight: 700;
-      pointer-events: none;
-      font-family: var(--font-mono);
+      margin-bottom: 7px;
+      font-family: Georgia, serif;
     }
 
     input {
       width: 100%;
-      background: rgba(255,255,255,0.04);
+      background: var(--cream);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      color: var(--text);
-      font-family: var(--font-mono);
-      font-size: 14px;
-      padding: 14px 16px 14px 44px;
-      transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+      border-bottom: 2px solid var(--border);
+      border-radius: 2px;
+      color: var(--ink);
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 15px;
+      padding: 12px 16px;
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
       outline: none;
     }
 
-    input::placeholder { color: var(--muted); }
+    input::placeholder {
+      color: var(--border);
+      font-style: italic;
+    }
 
     input:focus {
-      border-color: var(--accent1);
-      background: rgba(184,255,62,0.04);
-      box-shadow: 0 0 0 3px rgba(184,255,62,0.1);
+      border-color: var(--gold);
+      border-bottom-color: var(--gold-dark);
+      background: var(--warm-white);
+      box-shadow: 0 4px 12px rgba(201,168,76,0.12);
     }
 
-    .divider {
-      display: flex; align-items: center; gap: 12px;
-      margin: 8px 0 20px;
-      color: var(--muted); font-size: 11px; letter-spacing: 0.08em;
-      font-family: var(--font-mono);
+    /* Section divider */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 28px 0;
+      color: var(--muted);
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      font-family: Georgia, serif;
     }
-    .divider::before, .divider::after {
+    .section-divider::before, .section-divider::after {
       content: '';
       flex: 1; height: 1px;
       background: var(--border);
     }
 
+    /* Two column layout for passwords */
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    /* Submit button */
     .btn-register {
       width: 100%;
-      background: var(--accent1);
-      color: #0a0a0f;
-      border: none;
-      border-radius: 12px;
-      font-family: var(--font-display);
-      font-size: 16px;
-      font-weight: 800;
+      background: var(--ink);
+      color: var(--cream);
+      border: 1px solid var(--ink);
+      border-radius: 2px;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 12px;
+      font-weight: normal;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
       padding: 16px;
       cursor: pointer;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      transition: transform 0.15s, box-shadow 0.15s;
-      margin-top: 8px;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.15s;
+      margin-top: 12px;
+      position: relative;
+    }
+
+    .btn-register::before {
+      content: '';
+      position: absolute;
+      inset: 3px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 1px;
+      pointer-events: none;
     }
 
     .btn-register:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px rgba(184,255,62,0.35);
+      background: var(--gold-dark);
+      border-color: var(--gold-dark);
+      box-shadow: 0 4px 20px rgba(160,120,48,0.3);
+      transform: translateY(-1px);
     }
-    .btn-register:active { transform: translateY(0); }
 
-    .signin-row {
-      text-align: center;
+    .btn-register:active {
+      transform: translateY(0);
+    }
+
+    /* Bottom links */
+    .card-footer {
       margin-top: 24px;
-      font-size: 13px;
-      color: var(--muted);
-      font-family: var(--font-mono);
+      text-align: center;
     }
-    .signin-row a {
-      color: var(--accent3);
-      text-decoration: none;
-      font-weight: 700;
-    }
-    .signin-row a:hover { color: var(--accent1); }
 
     .terms {
       font-size: 11px;
       color: var(--muted);
+      font-style: italic;
+      line-height: 1.7;
+    }
+    .terms a {
+      color: var(--gold-dark);
+      text-decoration: none;
+      border-bottom: 1px solid var(--gold-light);
+    }
+    .terms a:hover { color: var(--gold); }
+
+    .signin-row {
       margin-top: 16px;
-      text-align: center;
-      line-height: 1.6;
-      font-family: var(--font-mono);
-    }
-    .terms a { color: var(--accent2); text-decoration: none; }
-
-    .thankyou {
-      text-align: center;
-      margin-top: 28px;
-      font-family: var(--font-display);
-      font-size: 13px;
-      color: var(--muted);
-      letter-spacing: 0.1em;
-    }
-    .thankyou span {
-      background: linear-gradient(135deg, var(--accent1), var(--accent2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      font-weight: 800;
-    }
-
-    .tags {
-      display: flex; flex-wrap: wrap; gap: 8px;
-      margin-bottom: 28px;
-    }
-    .tag {
-      font-size: 11px;
-      padding: 4px 12px;
-      border-radius: 100px;
-      border: 1px solid var(--border);
+      font-size: 12px;
       color: var(--muted);
       letter-spacing: 0.05em;
-      font-family: var(--font-mono);
     }
-    .tag.a1 { border-color: rgba(184,255,62,0.3); color: var(--accent1); }
-    .tag.a2 { border-color: rgba(255,62,184,0.3); color: var(--accent2); }
-    .tag.a3 { border-color: rgba(62,184,255,0.3); color: var(--accent3); }
+    .signin-row a {
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: bold;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .signin-row a:hover {
+      color: var(--gold-dark);
+      border-color: var(--gold);
+    }
+
+    /* Tags */
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 28px;
+    }
+    .tag {
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      color: var(--muted);
+      font-family: Georgia, serif;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .tag:hover {
+      border-color: var(--gold);
+      color: var(--gold-dark);
+    }
+
+    /* Footer */
+    .footer-text {
+      text-align: center;
+      margin-top: 24px;
+      font-size: 11px;
+      color: var(--muted);
+      font-style: italic;
+      letter-spacing: 0.08em;
+    }
+
+    @media (max-width: 500px) {
+      .card { padding: 28px 20px; }
+      .field-row { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
+  <div class="corner-br"></div>
 
   <div class="wrapper">
-    <div class="badge"><span class="dot"></span> First Quad Tech Solution</div>
 
-    <h1>Learn <span>DevOps</span><br/>the right way.</h1>
-    <p class="subtitle">Create your account and start your journey. No cap.</p>
-
-    <div class="tags">
-      <span class="tag a1">#DevOps</span>
-      <span class="tag a2">#CloudComputing</span>
-      <span class="tag a3">#Jenkins</span>
-      <span class="tag">#Docker</span>
-      <span class="tag">#AWS</span>
+    <div class="header">
+      <div class="monogram">FQ</div>
+      <p class="institution">First Quad Tech Solution</p>
+      <div class="rule"><div class="rule-diamond"></div></div>
+      <h1>Begin Your <em>DevOps</em> Journey</h1>
+      <p class="subtitle">Create an account to access our learning platform</p>
     </div>
 
     <div class="card">
+      <p class="card-title">New Member Registration</p>
+
       <form action="action_page.php" method="POST">
 
         <div class="field">
           <label for="Name">Full Name</label>
-          <div class="input-wrap">
-            <span class="input-prefix">[N]</span>
-            <input type="text" id="Name" name="Name" placeholder="e.g. Alex Johnson" required />
-          </div>
+          <input type="text" id="Name" name="Name" placeholder="Your full name" required />
         </div>
 
         <div class="field">
           <label for="mobile">Mobile Number</label>
-          <div class="input-wrap">
-            <span class="input-prefix">[M]</span>
-            <input type="tel" id="mobile" name="mobile" placeholder="+91 98765 43210" required />
-          </div>
+          <input type="tel" id="mobile" name="mobile" placeholder="+91 00000 00000" required />
         </div>
 
         <div class="field">
           <label for="email">Email Address</label>
-          <div class="input-wrap">
-            <span class="input-prefix">[E]</span>
-            <input type="email" id="email" name="email" placeholder="you@email.com" required />
-          </div>
+          <input type="email" id="email" name="email" placeholder="your@email.com" required />
         </div>
 
-        <div class="divider">-- security --</div>
+        <div class="section-divider">Security Credentials</div>
 
-        <div class="field">
-          <label for="psw">Password</label>
-          <div class="input-wrap">
-            <span class="input-prefix">[P]</span>
-            <input type="password" id="psw" name="psw" placeholder="Make it strong!" required />
+        <div class="field-row">
+          <div class="field">
+            <label for="psw">Password</label>
+            <input type="password" id="psw" name="psw" placeholder="Enter password" required />
           </div>
-        </div>
-
-        <div class="field">
-          <label for="psw-repeat">Confirm Password</label>
-          <div class="input-wrap">
-            <span class="input-prefix">[C]</span>
-            <input type="password" id="psw-repeat" name="psw-repeat" placeholder="Same as above" required />
+          <div class="field">
+            <label for="psw-repeat">Confirm</label>
+            <input type="password" id="psw-repeat" name="psw-repeat" placeholder="Repeat password" required />
           </div>
         </div>
 
         <button type="submit" class="btn-register">Create Account</button>
 
-        <p class="terms">
-          By registering, you agree to our <a href="#">Terms</a> &amp; <a href="#">Privacy Policy</a>.
-        </p>
+        <div class="card-footer">
+          <p class="terms">
+            By registering, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
+          </p>
+          <p class="signin-row">
+            Already have an account? <a href="#">Sign in here</a>
+          </p>
+        </div>
+
       </form>
     </div>
 
-    <p class="signin-row">Already have an account? <a href="#">Sign in here</a></p>
+    <div class="tags">
+      <span class="tag">DevOps</span>
+      <span class="tag">Cloud</span>
+      <span class="tag">Jenkins</span>
+      <span class="tag">Docker</span>
+      <span class="tag">AWS</span>
+    </div>
 
-    <p class="thankyou">-- <span>Happy Learning!</span> You got this. --</p>
+    <p class="footer-text">Happy Learning &mdash; First Quad Tech Solution</p>
+
   </div>
 
   <script>
@@ -370,9 +462,12 @@
       var p2 = document.getElementById('psw-repeat').value;
       if (p1 !== p2) {
         e.preventDefault();
-        document.getElementById('psw-repeat').style.borderColor = '#ff3eb8';
-        document.getElementById('psw-repeat').style.boxShadow = '0 0 0 3px rgba(255,62,184,0.15)';
-        document.getElementById('psw-repeat').placeholder = "Passwords do not match!";
+        var confirmField = document.getElementById('psw-repeat');
+        confirmField.style.borderColor = '#c0392b';
+        confirmField.style.boxShadow = '0 4px 12px rgba(192,57,43,0.15)';
+        confirmField.placeholder = 'Passwords do not match';
+        confirmField.value = '';
+        confirmField.focus();
       }
     });
   </script>
